@@ -1,25 +1,29 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 public class Solution
 {
     public int[] solution(int[] numbers)
     {
-        List<int> answer = new List<int>();
-
-        for (int n = 0; n < numbers.Length - 1; n++)
+        int[] answer = new int[numbers.Length * 2];
+        
+        int n = 0;
+        for (int j = 0; j < numbers.Length; j++)
         {
-            for (int m = n + 1; m < numbers.Length; m++)
+            for (int k = j + 1; k < numbers.Length; k++)
             {
-                int sum = numbers[n] + numbers[m];
-                if (!answer.Contains(sum))
+                int num = numbers[j] + numbers[k];
+
+                if (!answer.Contains(num))
                 {
-                    answer.Add(sum);
+                    answer[n] = num;
+                    n++;
                 }
             }
         }
-
-        answer.Sort();
-        return answer.ToArray();
+        Array.Resize(ref answer, n);
+        Array.Sort(answer);
+        return answer;
     }
 }
