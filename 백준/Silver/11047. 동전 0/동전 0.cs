@@ -1,52 +1,34 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
-public static class BJ11047
+public static class BJ11047_2
 {
     public static void Main(string[] args)
     {
-        int[] inputs = Console.ReadLine().Split(' ').Select(int.Parse).ToArray();
-        int n = inputs[0];
-        int m = inputs[1];
-        int result = 0;
-        // Console.WriteLine($"{n} {m} {result}");
+        string[] S = Console.ReadLine().Split().ToArray();
+        int N = int.Parse(S[0]);
+        int K = int.Parse(S[1]);
+        List<int> money = new List<int>();
 
-        List<int> wallet = new List<int>();
-        for (int i = 0; i < n; i++)
-        {
-            int money = int.Parse(Console.ReadLine());
-            wallet.Add(money);
-        }
+        for (int i = 0; i < N; i++)
+            money.Add(int.Parse(Console.ReadLine()));
 
-        wallet.Reverse();
-        int j = 0;
-        while (m != 0)
+        int count = 0;
+        for (int i = money.Count - 1; i >= 0; i--)
         {
-            if (wallet[j] <= m)
+            if (K <= 0)
+                break;
+
+            if (money[i] > K)
+                continue;
+            else
             {
-                result += (m / wallet[j]);
-                m = m % wallet[j];
-                // Console.WriteLine($"{m} {result}");
+                count += (K / money[i]);
+                K %= money[i];
             }
-
-            j++;
         }
 
-        Console.WriteLine(result);
+        Console.WriteLine(count);
     }
-
 }
-
-// 4200
-// 1000 * 4 --> 200
-// 100 * 2 --> 0
-
-// 4790
-// 1000 * 4 --> 790
-// 500 * 1 --> 290
-// 100 * 2 --> 90
-// 50 * 1 --> 40
-// 10 * 4 --> 0
