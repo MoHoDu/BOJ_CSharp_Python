@@ -28,8 +28,8 @@ public static class BJ2675
         string ss = "";
         foreach (char c in s)
         {
-            string cs = c.ToString();
-            ss += String.Concat(Enumerable.Repeat(cs, r));
+            string ns = new string(c, r);
+            ss += ns;
         }
 
         return ss;
