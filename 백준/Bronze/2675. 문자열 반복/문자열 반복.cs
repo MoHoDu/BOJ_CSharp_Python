@@ -1,22 +1,37 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 
-public class StringsClass
+public static class BJ2675
 {
     public static void Main(string[] args)
     {
         int T = int.Parse(Console.ReadLine());
-        for (int count = 0; count < T; count++)
+        StringBuilder sb = new StringBuilder();
+
+        for (int i = 0; i < T; i++)
         {
-            string[] inp = Console.ReadLine().Split();
-            int repeatTime = int.Parse(inp[0]);
-            string text = inp[1];
-            for (int idx = 0; idx < text.Length; idx++)
-            {
-                for (int n = 0; n < repeatTime; n++)
-                    Console.Write(text[idx]);
-            }
-            Console.Write("\n");
+            string[] RS = Console.ReadLine().Split();
+            int R = int.Parse(RS[0]);
+            string S = RS[1];
+
+            sb.Append(RepeatWords(R, S) + "\n");
         }
+
+        Console.WriteLine(sb);
+    }
+
+    public static string RepeatWords(int r, string s)
+    {
+        string ss = "";
+        foreach (char c in s)
+        {
+            string cs = c.ToString();
+            ss += String.Concat(Enumerable.Repeat(cs, r));
+        }
+
+        return ss;
     }
 }
