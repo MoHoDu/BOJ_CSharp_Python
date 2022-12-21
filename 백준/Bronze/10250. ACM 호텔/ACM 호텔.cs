@@ -1,26 +1,29 @@
 using System;
 using System.Collections.Generic;
+using System.Text;
 using System.Linq;
 
-public static class BJ10250
+public static class BJtest
 {
-    public static int answer = 0;
-
+    public static StringBuilder sb = new StringBuilder();
     public static void Main(string[] args)
     {
-        int T = int.Parse(Console.ReadLine());
-
-        for (int i = 0; i < T; i++)
+        int testcase;
+        int.TryParse(Console.ReadLine(), out testcase);
+        // H W N
+        for (int i = 0; i < testcase; i++)
         {
-            string[] strs = Console.ReadLine().Split().Select(t => t).ToArray();
-            int H = int.Parse(strs[0]);
-            int W = int.Parse(strs[1]);
-            int N = int.Parse(strs[2]);
+            int[] inputs = Console.ReadLine().Split().Select(t => int.Parse(t)).ToArray();
+            int H = inputs[0];
+            int W = inputs[1];
+            int N = inputs[2];
 
-            int floor = (N % H) == 0 ? H * 100 : (N % H) * 100;
-            int room = (N % H) == 0 ? (N / H) : (N / H) + 1;
+            int newH = (N % H == 0 ? H : (N % H)) * 100;
+            int newW = N % H == 0 ? (N / H) : (N / H) + 1;
+            int room = newH + newW;
 
-            Console.WriteLine(floor + room);
+            sb.Append(room + "\n");
         }
+        Console.Write(sb);
     }
 }
